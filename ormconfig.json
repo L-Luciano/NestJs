@@ -1,0 +1,19 @@
+{
+    "type": "mssql",
+    "host": "localhost",
+    "database": "nest",
+    "username": "nest",
+    "password": "nest",
+    "logging": true,
+    "entities": [
+        "**/*.entity.ts",
+        "src/**/*.entity.ts"
+    ],
+    "synchronize": false,
+    "migrations": [
+        "migration/*.ts"
+    ],
+    "cli": {
+        "migrationsDir": "migration"
+    }
+}

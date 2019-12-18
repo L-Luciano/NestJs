@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
-import { User } from './user/user.entity';
 import { TerminusOptionsService } from './terminus-options/terminus-options.service';
 import { TerminusModule } from '@nestjs/terminus';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
+import { Users } from './users/users.entity';
 
 @Module({
   imports: [
@@ -14,17 +15,17 @@ import { TerminusModule } from '@nestjs/terminus';
       username: 'nest',
       password: 'nest',
       database: 'nest',
-      entities: [User],
+      entities: [Users],
       synchronize: false,
     }),
-    UserModule,
     TerminusModule.forRootAsync({
       useClass: TerminusOptionsService,
     }),
+    AuthModule,
+    UsersModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [TerminusOptionsService],
 })
 export class AppModule {
-  constructor(private readonly connection: Connection) {}
 }
